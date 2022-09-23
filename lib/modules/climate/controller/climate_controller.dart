@@ -1,24 +1,23 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:uno/uno.dart';
-
-import '../../../shared/service/service.dart';
-import '../model/model.dart';
+import '../../../shared/repositories/i_climate_repository.dart';
+import 'state/state_controller.dart';
 
 class ClimateController extends ChangeNotifier {
-  ServiceApi serviceApi = ServiceApi(Uno());
-  final controller = ClimateController();
+  final InterfaceRepository climateRepository;
 
-  ModelClimate? model;
+  ClimateState climateState = ClimateState('', false, false, null);
 
-  var isLoading = false;
-  var hasData = false;
-  var hasError = false;
+  ClimateController(this.climateRepository);
 
-  Future<void> getClimate() async {
-    final response = await serviceApi.get('Betim');
-    print(response);
-    model = response;
+  Future<void> getClimate({required String city}) async {
+    try {
+      climateState = ClimateState('', true, false, null);
+      final response = await climateRepository.get(city);
+      climateState = ClimateState('', false, false, response);
+    } catch (e) {
+      climateState = ClimateState(e.toString(), false, true, null);
+    }
 
     notifyListeners();
   }

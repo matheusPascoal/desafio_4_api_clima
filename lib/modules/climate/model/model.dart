@@ -1,30 +1,30 @@
-class ModelClimate {
+class ClimateModel {
   final String temperature;
   final String wind;
   final String description;
   final List<Forecast> forecast;
 
-  ModelClimate({
+  ClimateModel({
     required this.temperature,
     required this.wind,
     required this.description,
     required this.forecast,
   });
 
-  // ModelClimate.fromJson(Map<String, dynamic> json) {
+  // ClimateModel.fromJson(Map<String, dynamic> json) {
   //   temperature = json['temperature'] ?? '';
   //   wind = json['wind'] ?? '';
   //   description = json['description'] ?? '';
   //   // forecast = json['forecast'] ?? '';
   // }
 
-  // ModelClimate.fromJson2(Map<String, dynamic> json)
+  // ClimateModel.fromJson2(Map<String, dynamic> json)
   //     : temperature = json['temperature'],
   //       wind = json['wind'],
   //       description = json['description'];
 
-  factory ModelClimate.fromMap(Map<String, dynamic> json) {
-    return ModelClimate(
+  factory ClimateModel.fromMap(Map<String, dynamic> json) {
+    return ClimateModel(
       temperature: json['temperature'],
       wind: json['wind'],
       description: json['description'],
@@ -34,7 +34,7 @@ class ModelClimate {
   }
   @override
   String toString() {
-    return 'ModelClimate: $temperature';
+    return 'ClimateModel: $temperature';
   }
 }
 

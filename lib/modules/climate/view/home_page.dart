@@ -1,11 +1,17 @@
 import 'package:flutter/material.dart';
+import 'package:uno/uno.dart';
 
 import '../../../shared/core/theme/colors_theme/colors_theme.dart';
 import '../../../shared/core/theme/images_app/images_app.dart';
-import '../../../shared/widget/field_search.dart';
+import '../../../shared/repositories/climate_data_source.dart';
+import '../../../shared/repositories/climate_repository.dart';
+import '../../../shared/repositories/i_climate_datasource.dart';
+import '../../../shared/repositories/i_climate_repository.dart';
 import '../../../shared/widget/forecast_card.dart';
+
 import '../../../shared/widget/info_climate_widget.dart';
 import '../controller/climate_controller.dart';
+import '../widget/field_search.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -15,29 +21,46 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  final controller = ClimateController();
+  late final Uno uno;
+  late final InterfaceDatasoucer climateDataSource;
+  late final InterfaceRepository climateRepository;
+  late final ClimateController climateController;
   final _formKey = GlobalKey<FormState>();
 
   @override
   void initState() {
     super.initState();
-    controller.getClimate();
+    uno = Uno();
+    climateDataSource = ClimateDataSource(uno);
+    climateRepository = ClimateRepository(climateDataSource);
+    climateController = ClimateController(climateRepository);
+    climateController.getClimate(city: '');
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: ColorsTheme.colorHotWeather,
+      backgroundColor: ColorsTheme.colorblackWeather,
       body: SafeArea(
         child: SingleChildScrollView(
-          //APP QUEBRANDO AQUI ASSIM Q SAI DA SPLASH
           child: AnimatedBuilder(
-            animation: controller,
+            animation: climateController,
             builder: (context, _) {
-              if (controller.isLoading) {
+              if (climateController.climateState.hasError) {
+                WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    SnackBar(
+                      backgroundColor: Colors.red,
+                      content:
+                          Text(climateController.climateState.errorMenssage),
+                    ),
+                  );
+                });
+              }
+              if (climateController.climateState.model == null) {
                 return const Center(child: CircularProgressIndicator());
               }
-              final forecasts = controller.model!.forecast;
+              final forecasts = climateController.climateState.model!.forecast;
               return Center(
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
@@ -47,16 +70,20 @@ class _HomePageState extends State<HomePage> {
                     ),
                     InfoClimateWidget(
                       imageTemperature: ImagesApp.hotWeather,
-                      temperature: controller.model!.temperature,
-                      wind: controller.model!.wind,
-                      description: controller.model!.description,
+                      temperature:
+                          climateController.climateState.model!.temperature,
+                      wind: climateController.climateState.model!.wind,
+                      description:
+                          climateController.climateState.model!.description,
                     ),
                     const SizedBox(
                       height: 40,
                     ),
                     Form(
                       key: _formKey,
-                      child: const FieldSearch(),
+                      child: FieldSearch(
+                        climateController: climateController,
+                      ),
                     ),
                     const SizedBox(
                       height: 30,
@@ -77,6 +104,17 @@ class _HomePageState extends State<HomePage> {
           ),
         ),
       ),
+      floatingActionButton: FloatingActionButton(
+        child: Icon(Icons.search),
+        elevation: 15,
+        onPressed: () {},
+      ),
+      bottomNavigationBar: BottomAppBar(
+        elevation: 10,
+        color: Colors.amber,
+        child: Container(height: 50),
+      ),
+      floatingActionButtonLocation: FloatingActionButtonLocation.endDocked,
     );
   }
 }
