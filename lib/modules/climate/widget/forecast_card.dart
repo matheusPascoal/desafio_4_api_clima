@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../../../shared/core/responsivity/responsivity.dart';
+import '../../../shared/core/theme/theme_data.dart';
 import '../model/model.dart';
 
 class ForecastCard extends StatelessWidget {
@@ -14,8 +15,10 @@ class ForecastCard extends StatelessWidget {
       padding: const EdgeInsets.all(2),
       child: Container(
         decoration: BoxDecoration(
-          color: const Color(0XFF2F3543),
-          border: Border.all(width: 3),
+          color: themeData.primaryColor,
+          border: Border.all(
+            width: Responsivity.automatic(3, mediaQueryData),
+          ),
           borderRadius: const BorderRadius.all(
             Radius.circular(25),
           ),
@@ -24,8 +27,8 @@ class ForecastCard extends StatelessWidget {
           padding: EdgeInsets.only(
             bottom: Responsivity.automatic(2, mediaQueryData),
             top: Responsivity.automatic(5, mediaQueryData),
-            left: Responsivity.automatic(20, mediaQueryData),
-            right: Responsivity.automatic(20, mediaQueryData),
+            left: Responsivity.automatic(30, mediaQueryData),
+            right: Responsivity.automatic(30, mediaQueryData),
           ),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.center,
@@ -36,39 +39,47 @@ class ForecastCard extends StatelessWidget {
               ),
               Text(
                 forecast.day,
-                style: const TextStyle(
-                  color: Colors.white,
-                  fontSize: 15,
-                ),
+                style: themeData.textTheme.titleLarge,
               ),
-              const SizedBox(
-                width: 40,
+              SizedBox(
+                width: Responsivity.automatic(40, mediaQueryData),
               ),
-              const Icon(
+              Icon(
                 Icons.calendar_month_outlined,
-                color: Colors.white,
+                color: themeData.cardColor,
               ),
               Text(
                 forecast.temperature,
-                style: const TextStyle(
-                  color: Colors.white,
-                  fontSize: 15,
-                ),
+                style: themeData.textTheme.titleLarge,
               ),
-              const SizedBox(
-                width: 40,
+              SizedBox(
+                width: Responsivity.automatic(40, mediaQueryData),
               ),
-              const Icon(
-                Icons.calendar_month_outlined,
-                color: Colors.white,
+              Row(
+                children: [
+                  Column(
+                    children: [
+                      Container(
+                        child: Image.asset(
+                          'assets/wind.png',
+                          color: themeData.cardColor,
+                          scale: Responsivity.automatic(2.8, mediaQueryData),
+                        ),
+                      ),
+                      Container(
+                        child: Text(
+                          forecast.wind,
+                          style: themeData.textTheme.titleLarge,
+                        ),
+                      ),
+                    ],
+                  ),
+                ],
               ),
-              Text(
-                forecast.wind,
-                style: const TextStyle(
-                  color: Colors.white,
-                  fontSize: 15,
-                ),
-              ),
+              // Icon(
+              //   Icons.calendar_month_outlined,
+              //   color: themeData.cardColor,
+              // ),
             ],
           ),
         ),

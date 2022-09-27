@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import '../../../shared/core/responsivity/responsivity.dart';
-import '../../../shared/core/theme/theme.dart';
+import '../../../shared/core/theme/theme_data.dart';
 
 class InfoClimateWidget extends StatelessWidget {
   final String temperature;
@@ -31,19 +31,16 @@ class InfoClimateWidget extends StatelessWidget {
           ),
           Text(
             temperature,
-            style:
-                AppTheme.fonts.bold700Head26(color: AppTheme.colors.textWhite),
+            style: themeData.textTheme.displayLarge,
           ),
           Text(
             description,
-            style:
-                AppTheme.fonts.bold700Title24(color: AppTheme.colors.textWhite),
+            style: themeData.textTheme.labelLarge,
           ),
           SizedBox(
             child: Text(
               wind,
-              style: AppTheme.fonts
-                  .bold700Title22(color: AppTheme.colors.textWhite),
+              style: themeData.textTheme.titleSmall,
             ),
           ),
           const SizedBox(

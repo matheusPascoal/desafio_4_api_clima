@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:uno/uno.dart';
-import '../../../shared/core/responsivity/responsivity.dart';
-import '../../../shared/core/theme/theme.dart';
-import '../repositories/climate/climate_repository.dart';
-import '../datasource/climate/climate_data_source.dart';
 import '../../../shared/core/http_client/uno_http_impl.dart';
+import '../../../shared/core/responsivity/responsivity.dart';
+import '../../../shared/core/theme/theme_data.dart';
 import '../controller/climate_controller.dart';
+import '../datasource/climate/climate_data_source.dart';
+import '../repositories/climate/climate_repository.dart';
 import '../widget/field_search.dart';
 import '../widget/forecast_card.dart';
 import '../widget/info_climate_widget.dart';
@@ -43,7 +43,7 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     final mediaQueryData = MediaQuery.of(context);
     return Scaffold(
-      backgroundColor: AppTheme.colors.backgroundck,
+      backgroundColor: themeData.splashColor,
       body: SafeArea(
         child: SingleChildScrollView(
           child: AnimatedBuilder(
@@ -53,7 +53,7 @@ class _HomePageState extends State<HomePage> {
                 WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
                   ScaffoldMessenger.of(context).showSnackBar(
                     SnackBar(
-                      backgroundColor: Colors.red,
+                      backgroundColor: themeData.errorColor,
                       content:
                           Text(climateController.climateState.errorMenssage),
                     ),

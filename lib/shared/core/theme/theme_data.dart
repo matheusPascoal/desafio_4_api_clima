@@ -1,99 +1,78 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
-final primaryColor = const Color(0XFF2F3543);
+Color get splashColor => const Color(0XFF222222);
+Color get backgroundLigth => const Color(0XFFF1F1F1);
+Color get backgroundPrimary => const Color.fromARGB(255, 58, 61, 68);
+Color get fieldColor => const Color.fromARGB(255, 104, 106, 112);
 
-final themeDataNormal = ThemeData(
+Color get textBlack => const Color(0XFF000000);
+Color get textWhite => const Color(0XFFFFFFFF);
+Color get alert1 => const Color(0XFFF48120);
+Color get iconColor => const Color(0XFFFFFFFF);
+
+final themeData = ThemeData(
   //ESQUEMA DE CORES
-  primaryColor: primaryColor,
+  splashColor: splashColor,
+  primaryColor: backgroundPrimary,
+  errorColor: alert1,
+  cardColor: iconColor,
 
-  //APPBAR
-  appBarTheme: AppBarTheme(
-    elevation: 0,
-    backgroundColor: const Color(0XFF222222),
-    iconTheme: IconThemeData(
-      color: primaryColor,
-    ),
-  ),
+  // //APPBAR
+  // appBarTheme: AppBarTheme(
+  //   elevation: 0,
+  //   backgroundColor: const Color(0XFF222222),
+  //   iconTheme: IconThemeData(
+  //     color: backgroundPrimary,
+  //   ),
+  // ),
 
   //ELEVATED BUTTOM
-  elevatedButtonTheme: ElevatedButtonThemeData(
-    style: ElevatedButton.styleFrom(
-      primary: primaryColor,
-      textStyle: const TextStyle(
-        fontFamily: 'Roboto',
-        fontSize: 16,
-      ),
-    ),
-  ),
+  // elevatedButtonTheme: ElevatedButtonThemeData(
+  //   style: ElevatedButton.styleFrom(
+  //     primary: fieldColor,
+  //   ),
+  // ),
 
   //TEXTOS
   textTheme: TextTheme(
-    displayLarge: TextStyle(
-      fontSize: 40,
-      fontWeight: FontWeight.bold,
-      color: primaryColor,
+    displayLarge: GoogleFonts.josefinSans(
+      fontSize: 100,
+      fontWeight: FontWeight.w700,
+      color: textWhite,
     ),
-    labelLarge: const TextStyle(
-      fontFamily: 'Roboto',
-      fontSize: 20,
-      color: Colors.black26,
-    ),
-    titleLarge: const TextStyle(
-      fontFamily: 'Roboto',
+    labelLarge: GoogleFonts.sairaSemiCondensed(
       fontSize: 30,
-      fontWeight: FontWeight.bold,
+      fontWeight: FontWeight.w600,
+      color: textWhite,
     ),
-    titleMedium: const TextStyle(
-      fontFamily: 'Roboto',
-      fontSize: 20,
+    titleLarge: GoogleFonts.sairaSemiCondensed(
+      fontSize: 18,
+      fontWeight: FontWeight.w700,
+      color: textWhite,
     ),
-    titleSmall: const TextStyle(
-      fontFamily: 'Roboto',
-      fontSize: 17,
-      fontWeight: FontWeight.bold,
-    ),
-  ),
-
-  //INPUT DECORATION THEME
-  inputDecorationTheme: InputDecorationTheme(
-    labelStyle: const TextStyle(
-      fontFamily: 'Roboto',
-      fontSize: 14,
-    ),
-    iconColor: primaryColor,
-    prefixIconColor: primaryColor,
-    enabledBorder: OutlineInputBorder(
-      borderSide: BorderSide(color: primaryColor, width: 0.0),
-      borderRadius: const BorderRadius.all(
-        Radius.circular(5),
-      ),
+    titleSmall: GoogleFonts.ubuntu(
+      fontSize: 25,
+      fontWeight: FontWeight.w700,
+      color: textWhite,
     ),
   ),
 );
+  
 
-
-// class FontApp {
-//   ///BOLD
-//   TextStyle bold700Head26({Color? color}) => GoogleFonts.josefinSans(
-//         fontSize: 100,
-//         fontWeight: FontWeight.w700,
-//         color: color ?? Colors.white,
-//       );
-
-//   TextStyle bold700Title24({Color? color}) => GoogleFonts.sairaSemiCondensed(
-//         fontSize: 40,
-//         fontWeight: FontWeight.w600,
-//         color: color ?? Colors.black,
-//       );
-
-//   TextStyle bold700Title22({Color? color}) => GoogleFonts.sairaSemiCondensed(
-//         fontSize: 25,
-//         fontWeight: FontWeight.w700,
-//         color: color ?? Colors.black,
-//       );
-//   TextStyle bold700Title21({Color? color}) => GoogleFonts.ubuntu(
-//         fontSize: 30,
-//         fontWeight: FontWeight.w700,
-//         color: color ?? Colors.black,
-//       );
-// }
+  //INPUT DECORATION THEME
+//   inputDecorationTheme: InputDecorationTheme(
+//     labelStyle: const TextStyle(
+//       fontFamily: 'Roboto',
+//       fontSize: 14,
+//     ),
+//     iconColor: primaryColor,
+//     prefixIconColor: primaryColor,
+//     enabledBorder: OutlineInputBorder(
+//       borderSide: BorderSide(color: primaryColor, width: 0.0),
+//       borderRadius: const BorderRadius.all(
+//         Radius.circular(5),
+//       ),
+//     ),
+//   ),
+// );

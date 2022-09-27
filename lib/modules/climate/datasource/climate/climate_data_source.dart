@@ -1,6 +1,6 @@
 import '../../../../shared/base.dart';
 import '../../../../shared/core/http_client/http_client.dart';
-import '../../../../shared/repositories/datasource/i_climate_datasource.dart';
+import 'i_climate_datasource.dart';
 
 class ClimateDataSource implements InterfaceDatasoucer {
   final HttpClient httpClient;
