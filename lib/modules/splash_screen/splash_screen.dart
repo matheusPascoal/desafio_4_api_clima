@@ -1,9 +1,6 @@
 import 'dart:async';
-
 import 'package:flutter/material.dart';
-
-import '../../shared/core/theme/colors_theme/colors_theme.dart';
-import '../../shared/core/theme/images_app/images_app.dart';
+import '../../shared/core/theme/theme.dart';
 import '../climate/view/home_page.dart';
 
 class SplashScreen extends StatefulWidget {
@@ -35,9 +32,9 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: ColorsTheme.colorblackWeather,
+      backgroundColor: AppTheme.colors.backgroundSplash,
       body: Center(
-        child: Image.network(ImagesApp.logoImage),
+        child: Image.asset('assets/logo.jpg'),
       ),
     );
   }

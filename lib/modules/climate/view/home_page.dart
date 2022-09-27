@@ -1,17 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:uno/uno.dart';
-
-import '../../../shared/core/theme/colors_theme/colors_theme.dart';
-import '../../../shared/core/theme/images_app/images_app.dart';
-import '../../../shared/repositories/climate_data_source.dart';
-import '../../../shared/repositories/climate_repository.dart';
-import '../../../shared/repositories/i_climate_datasource.dart';
-import '../../../shared/repositories/i_climate_repository.dart';
-import '../../../shared/widget/forecast_card.dart';
-
-import '../../../shared/widget/info_climate_widget.dart';
+import '../../../shared/core/responsivity/responsivity.dart';
+import '../../../shared/core/theme/theme.dart';
+import '../repositories/climate/climate_repository.dart';
+import '../datasource/climate/climate_data_source.dart';
+import '../../../shared/core/http_client/uno_http_impl.dart';
 import '../controller/climate_controller.dart';
 import '../widget/field_search.dart';
+import '../widget/forecast_card.dart';
+import '../widget/info_climate_widget.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -21,26 +18,32 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  late final Uno uno;
-  late final InterfaceDatasoucer climateDataSource;
-  late final InterfaceRepository climateRepository;
-  late final ClimateController climateController;
+  final textCityController = TextEditingController();
   final _formKey = GlobalKey<FormState>();
+  final climateController = ClimateController(
+    ClimateRepository(
+      ClimateDataSource(
+        UnoHttpImpl(
+          Uno(),
+        ),
+      ),
+    ),
+  );
 
   @override
   void initState() {
     super.initState();
-    uno = Uno();
-    climateDataSource = ClimateDataSource(uno);
-    climateRepository = ClimateRepository(climateDataSource);
-    climateController = ClimateController(climateRepository);
-    climateController.getClimate(city: '');
+    // DEPOIS QUE CONSTRUIR TUDO CHAMA OQ ESTA NO ADDPOSTFRAMECALBACK
+    WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
+      climateController.getClimate(city: 'betim');
+    });
   }
 
   @override
   Widget build(BuildContext context) {
+    final mediaQueryData = MediaQuery.of(context);
     return Scaffold(
-      backgroundColor: ColorsTheme.colorblackWeather,
+      backgroundColor: AppTheme.colors.backgroundck,
       body: SafeArea(
         child: SingleChildScrollView(
           child: AnimatedBuilder(
@@ -68,8 +71,8 @@ class _HomePageState extends State<HomePage> {
                     const SizedBox(
                       height: 40,
                     ),
+                    // IMAGE/TEMPERATURA/VENTO/DESCRIÇÃO TEMPO.
                     InfoClimateWidget(
-                      imageTemperature: ImagesApp.hotWeather,
                       temperature:
                           climateController.climateState.model!.temperature,
                       wind: climateController.climateState.model!.wind,
@@ -82,6 +85,7 @@ class _HomePageState extends State<HomePage> {
                     Form(
                       key: _formKey,
                       child: FieldSearch(
+                        textCityController: textCityController,
                         climateController: climateController,
                       ),
                     ),
@@ -89,9 +93,8 @@ class _HomePageState extends State<HomePage> {
                       height: 30,
                     ),
                     SizedBox(
-                      height: 200,
+                      height: Responsivity.automatic(280, mediaQueryData),
                       child: ListView.builder(
-                        scrollDirection: Axis.horizontal,
                         itemCount: forecasts.length,
                         itemBuilder: (context, index) =>
                             ForecastCard(forecast: forecasts[index]),
@@ -104,17 +107,6 @@ class _HomePageState extends State<HomePage> {
           ),
         ),
       ),
-      floatingActionButton: FloatingActionButton(
-        child: Icon(Icons.search),
-        elevation: 15,
-        onPressed: () {},
-      ),
-      bottomNavigationBar: BottomAppBar(
-        elevation: 10,
-        color: Colors.amber,
-        child: Container(height: 50),
-      ),
-      floatingActionButtonLocation: FloatingActionButtonLocation.endDocked,
     );
   }
 }

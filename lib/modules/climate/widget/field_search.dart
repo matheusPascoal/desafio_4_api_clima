@@ -4,19 +4,23 @@ import '../controller/climate_controller.dart';
 class FieldSearch extends StatelessWidget {
   final String? Function(String?)? validation;
   final ClimateController climateController;
+  final TextEditingController textCityController;
+
   FieldSearch({
     super.key,
     required this.climateController,
     this.validation,
+    required this.textCityController,
   });
 
-  final textCityController = TextEditingController();
+  // final textCityController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
     return SizedBox(
       width: 300,
       child: TextFormField(
+        //  initialValue: climateController.city,
         validator: validation,
         controller: textCityController,
         decoration: InputDecoration(
@@ -32,8 +36,11 @@ class FieldSearch extends StatelessWidget {
                   ScaffoldMessenger.of(context).showSnackBar(
                     SnackBar(
                       backgroundColor: Colors.red,
-                      content: const Text('Error field is empty'),
-                      action: SnackBarAction(label: 'Undo', onPressed: () {}),
+                      content: const Text(
+                        'Error field is empty',
+                        style: TextStyle(fontSize: 20),
+                      ),
+                      action: SnackBarAction(label: '', onPressed: () {}),
                     ),
                   );
                   return;
