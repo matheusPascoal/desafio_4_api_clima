@@ -1,10 +1,10 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import '../repositories/climate/i_climate_repository.dart';
-import 'state/state_controller.dart';
+import 'state/climate_state.dart';
 
 class ClimateController extends ChangeNotifier {
-  final InterfaceRepository climateRepository;
+  final IClimateRepository climateRepository;
 
   ClimateState climateState = ClimateState('', false, false, null);
   String standarCity = 'Betim';

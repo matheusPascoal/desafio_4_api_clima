@@ -10,20 +10,20 @@ import '../widget/field_search.dart';
 import '../widget/forecast_card.dart';
 import '../widget/info_climate_widget.dart';
 
-class HomePage extends StatefulWidget {
-  const HomePage({super.key});
+class ClimatePage extends StatefulWidget {
+  const ClimatePage({super.key});
 
   @override
-  State<HomePage> createState() => _HomePageState();
+  State<ClimatePage> createState() => _ClimatePageState();
 }
 
-class _HomePageState extends State<HomePage> {
+class _ClimatePageState extends State<ClimatePage> {
   final textCityController = TextEditingController();
   final _formKey = GlobalKey<FormState>();
   final climateController = ClimateController(
     ClimateRepository(
       ClimateDataSource(
-        UnoHttpImpl(
+        RestHttpImpl(
           Uno(),
         ),
       ),
@@ -68,9 +68,14 @@ class _HomePageState extends State<HomePage> {
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    const SizedBox(
-                      height: 40,
+                    SizedBox(
+                      height: Responsivity.automatic(40, mediaQueryData),
                     ),
+                    Image.asset(
+                      'assets/temperate.png',
+                      color: themeData.cardColor,
+                    ),
+
                     // IMAGE/TEMPERATURA/VENTO/DESCRIÇÃO TEMPO.
                     InfoClimateWidget(
                       temperature:
@@ -79,9 +84,7 @@ class _HomePageState extends State<HomePage> {
                       description:
                           climateController.climateState.model!.description,
                     ),
-                    const SizedBox(
-                      height: 40,
-                    ),
+
                     Form(
                       key: _formKey,
                       child: FieldSearch(
@@ -89,8 +92,8 @@ class _HomePageState extends State<HomePage> {
                         climateController: climateController,
                       ),
                     ),
-                    const SizedBox(
-                      height: 30,
+                    SizedBox(
+                      height: Responsivity.automatic(10, mediaQueryData),
                     ),
                     SizedBox(
                       height: Responsivity.automatic(280, mediaQueryData),

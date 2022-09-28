@@ -4,8 +4,8 @@ import 'i_climate_repository.dart';
 
 // O DATASOURCE ENTREGA AS MAÇAS PARA O REPOSITORIO QUE VAI LEVAR
 // AS MAÇAS CORTADAS PARA O CONTROLLER
-class ClimateRepository implements InterfaceRepository {
-  final InterfaceDatasoucer climateDataSource;
+class ClimateRepository implements IClimateRepository {
+  final IClimateDatasoucer climateDataSource;
   ClimateRepository(this.climateDataSource);
   @override
   Future<ClimateModel> get(String city) async {

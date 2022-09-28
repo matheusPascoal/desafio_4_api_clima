@@ -1,4 +1,4 @@
 // CONTRATO
-abstract class InterfaceDatasoucer {
+abstract class IClimateDatasoucer {
   Future<Map<String, dynamic>> get(String city);
 }

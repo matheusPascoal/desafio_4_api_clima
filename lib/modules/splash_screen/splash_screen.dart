@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 
 import '../../shared/core/images/images_app.dart';
 import '../../shared/core/theme/theme_data.dart';
-import '../climate/view/home_page.dart';
+import '../climate/view/climate_page.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({
@@ -24,7 +24,7 @@ class _SplashScreenState extends State<SplashScreen> {
         Navigator.push(
           context,
           MaterialPageRoute(
-            builder: (context) => const HomePage(),
+            builder: (context) => const ClimatePage(),
           ),
         );
       }),

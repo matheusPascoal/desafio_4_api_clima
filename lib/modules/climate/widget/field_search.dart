@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import '../../../shared/core/responsivity/responsivity.dart';
+import '../../../shared/core/theme/theme_data.dart';
 import '../controller/climate_controller.dart';
 
 class FieldSearch extends StatelessWidget {
@@ -17,6 +19,7 @@ class FieldSearch extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final mediaQueryData = MediaQuery.of(context);
     return SizedBox(
       width: 300,
       child: TextFormField(
@@ -28,17 +31,17 @@ class FieldSearch extends StatelessWidget {
             borderRadius: BorderRadius.circular(30),
           ),
           suffixIcon: CircleAvatar(
-            backgroundColor: Colors.black54,
+            backgroundColor: themeData.bottomAppBarColor,
             child: IconButton(
               onPressed: () {
                 final value = textCityController.text;
                 if (value.isEmpty) {
                   ScaffoldMessenger.of(context).showSnackBar(
                     SnackBar(
-                      backgroundColor: Colors.red,
-                      content: const Text(
+                      backgroundColor: themeData.errorColor,
+                      content: Text(
                         'Error field is empty',
-                        style: TextStyle(fontSize: 20),
+                        style: themeData.textTheme.titleLarge,
                       ),
                       action: SnackBarAction(label: '', onPressed: () {}),
                     ),
@@ -47,16 +50,19 @@ class FieldSearch extends StatelessWidget {
                 }
                 climateController.getClimate(city: value);
               },
-              icon: const Icon(
+              icon: Icon(
                 Icons.search_rounded,
-                color: Colors.black,
+                color: themeData.primaryColor,
+                size: Responsivity.automatic(25, mediaQueryData),
               ),
             ),
           ),
           filled: true,
-          hintStyle: TextStyle(color: Colors.grey[800]),
-          fillColor: Colors.white70,
+          hintStyle: TextStyle(color: themeData.backgroundColor),
+          fillColor: themeData.backgroundColor,
+          alignLabelWithHint: true,
         ),
+        style: themeData.textTheme.bodyLarge,
       ),
     );
   }

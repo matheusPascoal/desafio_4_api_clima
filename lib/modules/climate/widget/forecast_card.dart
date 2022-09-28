@@ -12,10 +12,10 @@ class ForecastCard extends StatelessWidget {
   Widget build(BuildContext context) {
     final mediaQueryData = MediaQuery.of(context);
     return Padding(
-      padding: const EdgeInsets.all(2),
+      padding: const EdgeInsets.all(3),
       child: Container(
         decoration: BoxDecoration(
-          color: themeData.primaryColor,
+          color: themeData.indicatorColor,
           border: Border.all(
             width: Responsivity.automatic(3, mediaQueryData),
           ),
@@ -23,65 +23,59 @@ class ForecastCard extends StatelessWidget {
             Radius.circular(25),
           ),
         ),
-        child: Padding(
-          padding: EdgeInsets.only(
-            bottom: Responsivity.automatic(2, mediaQueryData),
-            top: Responsivity.automatic(5, mediaQueryData),
-            left: Responsivity.automatic(30, mediaQueryData),
-            right: Responsivity.automatic(30, mediaQueryData),
-          ),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              const Icon(
-                Icons.calendar_month_outlined,
-                color: Colors.white,
-              ),
-              Text(
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            //
+            // CALENDARIO
+            Icon(
+              Icons.calendar_month_outlined,
+              color: themeData.canvasColor,
+            ),
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Text(
                 forecast.day,
-                style: themeData.textTheme.titleLarge,
+                style: themeData.textTheme.titleSmall,
               ),
-              SizedBox(
-                width: Responsivity.automatic(40, mediaQueryData),
-              ),
-              Icon(
-                Icons.calendar_month_outlined,
-                color: themeData.cardColor,
-              ),
-              Text(
+            ),
+
+            SizedBox(
+              width: Responsivity.automatic(10, mediaQueryData),
+            ),
+            //
+            // TEMPERATURA
+            Image.asset(
+              'assets/temperate.png',
+              color: themeData.cardColor,
+              scale: Responsivity.automatic(2.8, mediaQueryData),
+            ),
+            Padding(
+              padding: const EdgeInsets.all(5.0),
+              child: Text(
                 forecast.temperature,
-                style: themeData.textTheme.titleLarge,
+                style: themeData.textTheme.titleSmall,
               ),
-              SizedBox(
-                width: Responsivity.automatic(40, mediaQueryData),
+            ),
+            SizedBox(
+              width: Responsivity.automatic(10, mediaQueryData),
+            ),
+            //
+            // VENTO
+            Image.asset(
+              'assets/wind.png',
+              color: themeData.cardColor,
+              scale: Responsivity.automatic(3, mediaQueryData),
+            ),
+
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Text(
+                forecast.wind,
+                style: themeData.textTheme.titleSmall,
               ),
-              Row(
-                children: [
-                  Column(
-                    children: [
-                      Container(
-                        child: Image.asset(
-                          'assets/wind.png',
-                          color: themeData.cardColor,
-                          scale: Responsivity.automatic(2.8, mediaQueryData),
-                        ),
-                      ),
-                      Container(
-                        child: Text(
-                          forecast.wind,
-                          style: themeData.textTheme.titleLarge,
-                        ),
-                      ),
-                    ],
-                  ),
-                ],
-              ),
-              // Icon(
-              //   Icons.calendar_month_outlined,
-              //   color: themeData.cardColor,
-              // ),
-            ],
-          ),
+            ),
+          ],
         ),
       ),
     );

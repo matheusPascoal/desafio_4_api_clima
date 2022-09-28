@@ -19,15 +19,12 @@ class InfoClimateWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     final mediaQueryData = MediaQuery.of(context);
     return SizedBox(
-      height: Responsivity.automatic(280, mediaQueryData),
+      height: Responsivity.automatic(220, mediaQueryData),
       width: Responsivity.automatic(300, mediaQueryData),
       child: Column(
         children: [
-          const SizedBox(
-            height: 20,
-          ),
-          const SizedBox(
-            height: 20,
+          SizedBox(
+            height: Responsivity.automatic(20, mediaQueryData),
           ),
           Text(
             temperature,
@@ -35,16 +32,20 @@ class InfoClimateWidget extends StatelessWidget {
           ),
           Text(
             description,
-            style: themeData.textTheme.labelLarge,
+            style: themeData.textTheme.titleSmall,
           ),
           SizedBox(
-            child: Text(
-              wind,
-              style: themeData.textTheme.titleSmall,
+            child: Padding(
+              padding:
+                  EdgeInsets.all(Responsivity.automatic(15, mediaQueryData)),
+              child: Text(
+                wind,
+                style: themeData.textTheme.titleLarge,
+              ),
             ),
           ),
-          const SizedBox(
-            height: 10,
+          SizedBox(
+            height: Responsivity.automatic(10, mediaQueryData),
           ),
         ],
       ),

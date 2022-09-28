@@ -1,9 +1,9 @@
-import '../../../../shared/base.dart';
+import '../../../../shared/core/base.dart';
 import '../../../../shared/core/http_client/http_client.dart';
 import 'i_climate_datasource.dart';
 
-class ClimateDataSource implements InterfaceDatasoucer {
-  final HttpClient httpClient;
+class ClimateDataSource implements IClimateDatasoucer {
+  final IHttpClient httpClient;
 // PRECISA LEVAR AS MAÇAS PARA O CLIENTE REPOSITORIO
   ClimateDataSource(this.httpClient);
 

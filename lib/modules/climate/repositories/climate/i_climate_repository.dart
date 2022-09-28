@@ -1,5 +1,5 @@
 import '../../model/model.dart';
 
-abstract class InterfaceRepository {
+abstract class IClimateRepository {
   Future<ClimateModel> get(String city);
 }
