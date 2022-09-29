@@ -14,7 +14,8 @@ class ClimateRepository implements IClimateRepository {
 
       return ClimateModel.fromMap(result);
     } catch (e) {
-      throw Exception('Error API');
+      rethrow;
+      // throw Exception('Error API');
     }
   }
 }

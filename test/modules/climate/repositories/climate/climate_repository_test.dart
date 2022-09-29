@@ -1,18 +1,22 @@
+import 'dart:convert';
+
 import 'package:desafio_4_fteam/modules/climate/datasource/climate/i_climate_datasource.dart';
+import 'package:desafio_4_fteam/modules/climate/mock.dart';
+import 'package:desafio_4_fteam/modules/climate/model/model.dart';
 import 'package:desafio_4_fteam/modules/climate/repositories/climate/climate_repository.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
 
-class UnoMock extends Mock implements IClimateDatasoucer {}
+class MockClimateDatasoucer extends Mock implements IClimateDatasoucer {}
 
-final Map<String, dynamic> map = {'teste': 'teste'};
+final map = mockData;
 
 void main() {
-  test('Test REPOSITORY', () async {
-    final repository = UnoMock();
-    final climateRepository = ClimateRepository(repository);
-    when(() => repository.get(any())).thenAnswer((_) async => map);
-    final response = await repository.get('');
-    expect(response, isA<Map<String, dynamic>>());
+  test('Deve retornar um ClimateModel', () async {
+    final climateDatasource = MockClimateDatasoucer();
+    final climateRepository = ClimateRepository(climateDatasource);
+    when(() => climateDatasource.get(any())).thenAnswer((_) async => map);
+    final response = await climateRepository.get('betim');
+    expect(response, isA<ClimateModel>());
   });
 }

@@ -3,15 +3,15 @@ import 'package:desafio_4_fteam/shared/core/http_client/http_client.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
 
-class UnoMock extends Mock implements IHttpClient {}
+class MockHttpClient extends Mock implements IHttpClient {}
 
 final Map<String, dynamic> map = {'teste': 'teste'};
 void main() {
-  test('Test DATASOURCE', () async {
-    final climateDataSource = UnoMock();
-    final dataSource = ClimateDataSource(climateDataSource);
+  test('Deve retornar um Map<String, dynamic>', () async {
+    final mockhttpClient = MockHttpClient();
+    final dataSource = ClimateDataSource(mockhttpClient);
 
-    when(() => climateDataSource.get(path: any(named: 'path')))
+    when(() => mockhttpClient.get(path: any(named: 'path')))
         .thenAnswer((_) async => map);
     final response = await dataSource.get('');
     expect(response, isA<Map<String, dynamic>>());
