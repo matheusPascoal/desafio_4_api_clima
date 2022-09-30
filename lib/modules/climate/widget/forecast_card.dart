@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../../../shared/core/responsivity/responsivity.dart';
 import '../../../shared/core/theme/theme_data.dart';
-import '../model/model.dart';
+import '../model/climate_model.dart';
 
 class ForecastCard extends StatelessWidget {
   final Forecast forecast;

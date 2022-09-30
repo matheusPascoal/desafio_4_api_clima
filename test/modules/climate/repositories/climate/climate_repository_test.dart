@@ -2,7 +2,7 @@ import 'dart:convert';
 
 import 'package:desafio_4_fteam/modules/climate/datasource/climate/i_climate_datasource.dart';
 import 'package:desafio_4_fteam/modules/climate/mock.dart';
-import 'package:desafio_4_fteam/modules/climate/model/model.dart';
+import 'package:desafio_4_fteam/modules/climate/model/climate_model.dart';
 import 'package:desafio_4_fteam/modules/climate/repositories/climate/climate_repository.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';

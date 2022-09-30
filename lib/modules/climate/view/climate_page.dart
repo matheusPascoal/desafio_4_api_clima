@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:uno/uno.dart';
 import '../../../shared/core/http_client/uno_http_impl.dart';
+import '../../../shared/core/images/images_app.dart';
 import '../../../shared/core/responsivity/responsivity.dart';
 import '../../../shared/core/theme/theme_data.dart';
 import '../controller/climate_controller.dart';
@@ -43,22 +44,19 @@ class _ClimatePageState extends State<ClimatePage> {
   Widget build(BuildContext context) {
     final mediaQueryData = MediaQuery.of(context);
     return Scaffold(
-      backgroundColor: themeData.splashColor,
+      backgroundColor: Theme.of(context).splashColor,
       body: SafeArea(
         child: SingleChildScrollView(
           child: AnimatedBuilder(
             animation: climateController,
             builder: (context, _) {
               if (climateController.climateState.hasError) {
-                WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
-                  ScaffoldMessenger.of(context).showSnackBar(
-                    SnackBar(
-                      backgroundColor: themeData.errorColor,
-                      content:
-                          Text(climateController.climateState.errorMenssage),
-                    ),
-                  );
-                });
+                ScaffoldMessenger.of(context).showSnackBar(
+                  SnackBar(
+                    backgroundColor: themeData.errorColor,
+                    content: Text(climateController.climateState.errorMenssage),
+                  ),
+                );
               }
               if (climateController.climateState.model == null) {
                 return const Center(child: CircularProgressIndicator());
@@ -72,7 +70,7 @@ class _ClimatePageState extends State<ClimatePage> {
                       height: Responsivity.automatic(40, mediaQueryData),
                     ),
                     Image.asset(
-                      'assets/temperate.png',
+                      ImagesApp.temperate,
                       color: themeData.cardColor,
                     ),
 

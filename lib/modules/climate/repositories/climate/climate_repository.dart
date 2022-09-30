@@ -1,5 +1,5 @@
 import '../../datasource/climate/i_climate_datasource.dart';
-import '../../model/model.dart';
+import '../../model/climate_model.dart';
 import 'i_climate_repository.dart';
 
 // O DATASOURCE ENTREGA AS MAÇAS PARA O REPOSITORIO QUE VAI LEVAR

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-Color get splashColor => const Color(0XFF222222);
+const Color _splashColor = Color(0XFF222222);
 Color get backgroundPrimary => const Color.fromARGB(255, 58, 61, 68);
 Color get fieldColor => const Color.fromARGB(255, 104, 106, 112);
 Color get errorColor => const Color(0XFFF70707);
@@ -11,7 +11,7 @@ Color get primaryColor => const Color.fromARGB(255, 0, 0, 0);
 
 final themeData = ThemeData(
   //ESQUEMA DE CORES
-  splashColor: splashColor,
+  splashColor: _splashColor,
   backgroundColor: backgroundPrimary,
   indicatorColor: fieldColor,
   errorColor: errorColor,

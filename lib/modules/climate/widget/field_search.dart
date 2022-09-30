@@ -62,7 +62,6 @@ class FieldSearch extends StatelessWidget {
           fillColor: themeData.backgroundColor,
           alignLabelWithHint: true,
         ),
-        style: themeData.textTheme.bodyLarge,
       ),
     );
   }

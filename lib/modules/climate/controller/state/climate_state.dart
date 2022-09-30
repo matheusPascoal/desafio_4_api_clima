@@ -1,4 +1,4 @@
-import '../../model/model.dart';
+import '../../model/climate_model.dart';
 
 class ClimateState {
   final ClimateModel? model;
